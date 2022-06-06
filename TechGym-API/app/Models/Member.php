@@ -19,4 +19,8 @@ class Member extends Model
         "birthday",
         "gender"
     ];
+
+    public function image () {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }

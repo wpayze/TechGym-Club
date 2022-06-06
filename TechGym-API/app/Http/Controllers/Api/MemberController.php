@@ -17,7 +17,7 @@ class MemberController extends Controller
 
             return response()->json([
                 'status' => true,
-                '$members' => $members
+                'members' => $members
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -30,10 +30,8 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         try {
-            $requestData = $request->all();
-
             $validatedMember = Validator::make(
-                $requestData,
+                $request->all(),
                 [
                     'names' => 'required',
                     'surnames' => 'required',
@@ -49,11 +47,11 @@ class MemberController extends Controller
                 ], 401);
             }
 
-            $newMember = Member::create($requestData);
+            $newMember = Member::create($request->all());
 
             return response()->json([
                 'status' => true,
-                '$member' => $newMember
+                'member' => $newMember
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -70,7 +68,7 @@ class MemberController extends Controller
 
             return response()->json([
                 'status' => true,
-                '$member' => $member
+                'member' => $member
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -106,7 +104,7 @@ class MemberController extends Controller
 
             return response()->json([
                 'status' => true,
-                '$member' => $member
+                'member' => $member
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -124,7 +122,7 @@ class MemberController extends Controller
 
             return response()->json([
                 'status' => true,
-                '$member' => $member
+                'member' => $member
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
