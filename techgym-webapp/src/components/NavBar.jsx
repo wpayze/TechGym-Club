@@ -1,6 +1,17 @@
 import { NavLink, Link } from "react-router-dom";
+import { useAppContext } from "../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+  const { isLoggedIn, setIsLoggedIn } = useAppContext();
+
+  const logout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("access_token");
+    navigate("/");
+  }
+
   return (
     <nav
       className="navbar is-link"
@@ -29,15 +40,16 @@ const NavBar = () => {
       </div>
       <div id="navbarBasicExample" className="navbar-menu">
         <div className="navbar-start">
-          <NavLink to="/" className="navbar-item">
-            Home
-          </NavLink>
-          <NavLink to="members" className="navbar-item">
-            Members
-          </NavLink>
-          <NavLink to="memberships" className="navbar-item">
-            Memberships
-          </NavLink>
+          {isLoggedIn && (
+            <>
+              <NavLink to="members" className="navbar-item">
+                Members
+              </NavLink>
+              <NavLink to="memberships" className="navbar-item">
+                Memberships
+              </NavLink>
+            </>
+          )}
 
           {/* <div className="navbar-item has-dropdown is-hoverable">
                         <a className="navbar-link">More</a>
@@ -53,8 +65,23 @@ const NavBar = () => {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <Link to="register" className="button is-info">Sign up</Link>
-              <Link to="login" className="button is-light">Log In</Link>
+              {!isLoggedIn ? (
+                <>
+                  <Link to="register" className="button is-info">
+                    Sign up
+                  </Link>
+                  <Link to="login" className="button is-light">
+                    Log In
+                  </Link>
+                </>
+              ) : (
+                <button
+                  className="button is-light"
+                  onClick={() => logout()}
+                >
+                  Log Out
+                </button>
+              )}
             </div>
           </div>
         </div>

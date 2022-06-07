@@ -1,18 +1,35 @@
 import "./Auth.scss";
-
-const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const data = {
-        name: e.target.name.value,
-        email: e.target.email.value,
-        password: e.target.password.value
-    }
-
-    console.log(data);
-}
+import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../../contexts/AppContext";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useAppContext();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
+
+    const response = await fetch(process.env.REACT_APP_API_URL + "register", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    const { status, token, message, errors } = await response.json();
+
+    if (status) {
+      setIsLoggedIn(true);
+      localStorage.setItem("access_token", token);
+      navigate("/");
+    } else console.log({ status, message, errors });
+  };
+
   return (
     <div className="has-background-light registerWrapper">
       <section className="container registerForm">
@@ -60,7 +77,10 @@ const Register = () => {
                       />
                     </div>
                   </div>
-                  <button type="submit" className="button is-block is-primary is-fullwidth is-medium">
+                  <button
+                    type="submit"
+                    className="button is-block is-primary is-fullwidth is-medium"
+                  >
                     Submit
                   </button>
                   <br />

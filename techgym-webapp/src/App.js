@@ -8,15 +8,20 @@ import Home from "./components/Home";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
+import Protected from "./components/Auth/Protected";
+
 function App() {
+
+  
+
   return (
     <Router>
       <div id="app">
         <NavBar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="members" element={<Members />} />
-          <Route path="memberships" element={<Memberships />} />
+          <Route path="/" element={ <Home /> } />
+          <Route path="members" element={ <Protected> <Members /> </Protected> } />
+          <Route path="memberships" element={<Protected> <Memberships /> </Protected>} />
           <Route path="*" element={<PageNotFound />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
