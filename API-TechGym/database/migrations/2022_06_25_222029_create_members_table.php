@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('members', function (Blueprint $table) {
             $table->id();
 
+            $table->unsignedBigInteger("branch_id");
+            $table->foreign("branch_id")->references("id")->on("branches");
+
             $table->string("names");
             $table->string("surnames");
             $table->string("email")->nullable();
@@ -23,7 +26,6 @@ return new class extends Migration
             $table->string("address")->nullable();
             $table->string("phone")->nullable();
             $table->string("emergency_phone")->nullable();
-
             $table->dateTime('birthday');
             $table->char('gender', 1);
 

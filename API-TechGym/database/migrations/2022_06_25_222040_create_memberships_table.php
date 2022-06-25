@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('memberships', function (Blueprint $table) {
             $table->id();
 
+            $table->unsignedBigInteger("company_id");
+            $table->foreign("company_id")->references("id")->on("companies");
+
             $table->string("name");
             $table->integer("price");
             $table->integer("months");
