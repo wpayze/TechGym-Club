@@ -8,10 +8,11 @@ import AddEditMember from "./components/Members/AddEditMember";
 
 import Memberships from "./components/Memberships";
 import Home from "./components/Home";
-import Login from "./components/Auth/Login";
-import Register from "./components/Auth/Register";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 
-import Protected from "./components/Auth/Protected";
+import Protected from "./pages/Auth/Protected";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   return (
@@ -25,9 +26,12 @@ function App() {
           <Route path="members/create" element={ <Protected> <AddEditMember /> </Protected> } />
 
           <Route path="memberships" element={<Protected> <Memberships /> </Protected>} />
-          <Route path="*" element={<PageNotFound />} />
+
+          <Route path="settings" element={<Protected> <Settings /> </Protected>} />
+  
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </Router>

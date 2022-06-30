@@ -4,7 +4,7 @@ import { useAppContext } from "../../contexts/AppContext";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useAppContext();
+  const { setIsLoggedIn, setCurrentUser } = useAppContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,11 +21,12 @@ const Register = () => {
       body: JSON.stringify(data),
     });
 
-    const { status, token, message, errors } = await response.json();
+    const { status, token, message, errors, user } = await response.json();
 
     if (status) {
       setIsLoggedIn(true);
-      localStorage.setItem("access_token", token);
+      setCurrentUser(user);
+      localStorage.setItem("access_token", "Bearer " + token);
       navigate("/");
     } else console.log({ status, message, errors });
   };
@@ -54,6 +55,7 @@ const Register = () => {
                         type="text"
                         placeholder="Name"
                         name="name"
+                        defaultValue={"Wilfredo"}
                       />
                     </div>
                   </div>
@@ -64,6 +66,7 @@ const Register = () => {
                         type="email"
                         placeholder="Email"
                         name="email"
+                        defaultValue={"wilfredo@email.com"}
                       />
                     </div>
                   </div>
@@ -74,6 +77,7 @@ const Register = () => {
                         type="password"
                         placeholder="Password"
                         name="password"
+                        defaultValue={"prueba"}
                       />
                     </div>
                   </div>

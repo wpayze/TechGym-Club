@@ -12,7 +12,7 @@ export const MembersProvider = ({children}) => {
     const [members, setMembers] = useState([]);
 
     const getMembers = async () => {
-        const response = await fetch(url + "members", {
+        const response = await fetch(url + "member", {
             headers: {
                 "Accept" : "application/json",
                 "Authorization" : localStorage.getItem("access_token")
@@ -27,7 +27,6 @@ export const MembersProvider = ({children}) => {
     }
 
     const addMember = async (data) => {
-        console.log(data);
         const response = await fetch(url + "member", {
             method: "POST",
             headers: {

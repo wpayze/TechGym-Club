@@ -3,7 +3,7 @@ import { useAppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { setIsLoggedIn } = useAppContext();
+  const { setIsLoggedIn, setCurrentUser } = useAppContext();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,10 +21,11 @@ const Register = () => {
     });
 
     const loginObject = await response.json();
-    const { status, token, message, errors } = loginObject;
+    const { status, token, message, errors, user } = loginObject;
   
     if (status) {
       setIsLoggedIn(true);
+      setCurrentUser(user);
       localStorage.setItem("access_token", "Bearer " + token);
       navigate("/");
     } else console.log({ status, message, errors });

@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Member;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class MemberController extends Controller
+class BranchController extends Controller
 {
     public function index()
     {
         try {
-            $members = Member::all();
+            $branches = Branch::all();
 
             return response()->json([
                 'status' => true,
-                'members' => $members
+                'branches' => $branches
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -29,28 +29,26 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         try {
-            $validatedMember = Validator::make(
+            $validatedBranch = Validator::make(
                 $request->all(),
                 [
-                    'names' => 'required',
-                    'surnames' => 'required',
-                    'birthday' => 'required'
+                    'name' => 'required'
                 ]
             );
 
-            if ($validatedMember->fails()) {
+            if ($validatedBranch->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
-                    'errors' => $validatedMember->errors()
+                    'errors' => $validatedBranch->errors()
                 ], 401);
             }
 
-            $newMember = Member::create($request->all());
+            $newBranch = Branch::create($request->all());
 
             return response()->json([
                 'status' => true,
-                'member' => $newMember
+                'branch' => $newBranch
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -63,11 +61,11 @@ class MemberController extends Controller
     public function show($id)
     {
         try {
-            $member = Member::findOrFail($id);
+            $branch = Branch::findOrFail($id);
 
             return response()->json([
                 'status' => true,
-                'member' => $member
+                'branch' => $branch
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -80,30 +78,28 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $member = Member::findOrFail($id);
+            $branch = Branch::findOrFail($id);
 
-            $validatedMember = Validator::make(
+            $validateBranch = Validator::make(
                 $request->all(),
                 [
-                    'names' => 'required',
-                    'surnames' => 'required',
-                    'birthday' => 'required'
+                    'name' => 'required'
                 ]
             );
 
-            if ($validatedMember->fails()) {
+            if ($validateBranch->fails()) {
                 return response()->json([
                     'status' => false,
                     'message' => 'validation error',
-                    'errors' => $validatedMember->errors()
+                    'errors' => $validateBranch->errors()
                 ], 401);
             }
 
-            $member->update($request->all());
+            $branch->update($request->all());
 
             return response()->json([
                 'status' => true,
-                'member' => $member
+                'branch' => $branch
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
@@ -115,13 +111,13 @@ class MemberController extends Controller
 
     public function destroy($id)
     {
-        try{
-            $member = Member::findOrFail($id);
-            $member->delete();
+        try {
+            $branch = Branch::findOrFail($id);
+            $branch->delete();
 
             return response()->json([
                 'status' => true,
-                'member' => $member
+                'branch' => $branch
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([

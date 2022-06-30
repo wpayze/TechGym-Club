@@ -8,12 +8,15 @@ export function useAppContext() {
 
 export const AppContextProvider = ({children}) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [currentUser, setCurrentUser] = useState();
 
     return (
         <AppContext.Provider
             value={{
                 isLoggedIn,
-                setIsLoggedIn
+                setIsLoggedIn,
+                currentUser,
+                setCurrentUser
             }}>
             {children}
         </AppContext.Provider>
