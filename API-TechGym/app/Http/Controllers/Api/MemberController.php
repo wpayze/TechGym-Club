@@ -34,7 +34,8 @@ class MemberController extends Controller
                 [
                     'names' => 'required',
                     'surnames' => 'required',
-                    'birthday' => 'required'
+                    'birthday' => 'required',
+                    'branch_id' => 'required'
                 ]
             );
 

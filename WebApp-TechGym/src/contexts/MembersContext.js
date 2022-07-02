@@ -4,7 +4,7 @@ const MembersContext = React.createContext();
 
 const url = process.env.REACT_APP_API_URL;
 
-export function useMembers() {
+export function useMember() {
     return useContext(MembersContext);
 }
 

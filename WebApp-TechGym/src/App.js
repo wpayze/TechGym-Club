@@ -14,6 +14,8 @@ import Register from "./pages/Auth/Register";
 import Protected from "./pages/Auth/Protected";
 import Settings from "./pages/Settings/Settings";
 
+import 'react-toastify/dist/ReactToastify.min.css';
+
 function App() {
   return (
     <Router>

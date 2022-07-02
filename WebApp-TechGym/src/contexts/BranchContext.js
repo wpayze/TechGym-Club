@@ -4,7 +4,7 @@ const BranchContext = React.createContext();
 
 const url = process.env.REACT_APP_API_URL;
 
-export function useBranchContext() {
+export function useBranch() {
     return useContext(BranchContext);
 }
 
@@ -20,7 +20,6 @@ export const BranchProvider = ({children}) => {
             }
         });
         const {status, branches, message} = await response.json();
-
         if (status)
             setBranches(branches);
         else
@@ -40,8 +39,22 @@ export const BranchProvider = ({children}) => {
 
         const {status, branch, message, errors} = await response.json();
 
-        if (status) return { status, branch };
-        else return { message, errors };
+        return { status, branch, message, errors };
+    }
+
+    const editBranch = async (data) => {
+        const response = await fetch(url + "branch", {
+            method: "PUT",
+            headers: {
+                "Accept" : "application/json",
+                "Content-Type" : "application/json",
+                "Authorization" : localStorage.getItem("access_token")
+            },
+            body: JSON.stringify(data)
+        });
+
+        const {status, branch, message, errors} = await response.json();
+        return { status, branch, message, errors };
     }
 
     return (
@@ -49,7 +62,8 @@ export const BranchProvider = ({children}) => {
             value={{
                 branches,
                 getBranches,
-                addBranch
+                addBranch,
+                editBranch
             }}>
             {children}
         </BranchContext.Provider>

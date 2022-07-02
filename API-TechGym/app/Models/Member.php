@@ -17,7 +17,8 @@ class Member extends Model
         "phone",
         "emergency_phone",
         "birthday",
-        "gender"
+        "gender",
+        "branch_id"
     ];
 
     public function image () {
