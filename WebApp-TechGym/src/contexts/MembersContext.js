@@ -23,7 +23,7 @@ export const MembersProvider = ({children}) => {
         if (status)
             setMembers(members);
         else
-            console.log({status,message})
+            console.error({status,message})
     }
 
     const addMember = async (data) => {
@@ -38,9 +38,7 @@ export const MembersProvider = ({children}) => {
         });
 
         const {status, member, message, errors} = await response.json();
-
-        if (status) return { status, member };
-        else return { message, errors };
+        return {status, member, message, errors};
     }
 
     return (

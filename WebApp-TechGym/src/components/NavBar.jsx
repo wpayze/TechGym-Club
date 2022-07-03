@@ -45,9 +45,6 @@ const NavBar = () => {
               <NavLink to="members" className="navbar-item">
                 Members
               </NavLink>
-              <NavLink to="memberships" className="navbar-item">
-                Memberships
-              </NavLink>
             </>
           )}
         </div>

@@ -5,8 +5,6 @@ import PageNotFound from "./components/PageNotFound";
 
 import Members from "./components/Members/Members";
 import AddEditMember from "./components/Members/AddEditMember";
-
-import Memberships from "./components/Memberships";
 import Home from "./components/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -26,8 +24,6 @@ function App() {
           
           <Route path="members" element={ <Protected> <Members /> </Protected> } />
           <Route path="members/create" element={ <Protected> <AddEditMember /> </Protected> } />
-
-          <Route path="memberships" element={<Protected> <Memberships /> </Protected>} />
 
           <Route path="settings" element={<Protected> <Settings /> </Protected>} />
   

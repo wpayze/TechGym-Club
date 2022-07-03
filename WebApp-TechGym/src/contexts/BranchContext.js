@@ -42,8 +42,8 @@ export const BranchProvider = ({children}) => {
         return { status, branch, message, errors };
     }
 
-    const editBranch = async (data) => {
-        const response = await fetch(url + "branch", {
+    const editBranch = async (data, id) => {
+        const response = await fetch(url + "branch/" + id, {
             method: "PUT",
             headers: {
                 "Accept" : "application/json",

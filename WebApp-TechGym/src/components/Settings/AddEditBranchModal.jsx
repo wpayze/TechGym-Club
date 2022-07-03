@@ -15,11 +15,11 @@ const AddEditBranchModal = ({ showModal, branch = null, closeModal, user }) => {
       company_id: user.company.id,
     };
 
-    let result = branch ? await editBranch(data) : await addBranch(data);
+    let result = branch ? await editBranch(data, branch.id) : await addBranch(data);
 
     if (result.status) {
       closeModal(true);
-      toast.success(name + " created successfully.", {
+      toast.success(`${name} ${branch ? "edited" : "created"} successfully.`, {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -32,7 +32,7 @@ const AddEditBranchModal = ({ showModal, branch = null, closeModal, user }) => {
     } else {
       console.error(result.message);
       Swal.fire({
-        title: "Error occurred creating this branch",
+        title: `Error occurred ${branch ? "editing" : "creating"} this branch.`,
         icon: "error",
       });
     }
@@ -64,6 +64,7 @@ const AddEditBranchModal = ({ showModal, branch = null, closeModal, user }) => {
                     name="name"
                     type="text"
                     placeholder="Name"
+                    defaultValue={branch ? branch.name : ""}
                   />
                 </div>
               </div>

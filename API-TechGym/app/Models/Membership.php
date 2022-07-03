@@ -12,7 +12,8 @@ class Membership extends Model
         "name",
         "price",
         "months",
-        "status"
+        "status",
+        "company_id"
     ];
 
     public function image () {
