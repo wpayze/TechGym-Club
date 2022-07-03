@@ -128,12 +128,14 @@ const Settings = () => {
         </div>
       </div>
       <AddEditBranchModal
+        key={selectedBranch ? "branch-" + selectedBranch.id : "branch-0"}
         user={currentUser}
         branch={selectedBranch}
         showModal={showBranchModal}
         closeModal={closeBranchModal}
       />
       <AddEditMembershipModal
+        key={selectedMembership ? "membership-" + selectedMembership.id : "membership-0"}
         user={currentUser}
         membership={selectedMembership}
         showModal={showMembershipModal}

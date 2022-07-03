@@ -1,10 +1,13 @@
 import "./Auth.scss";
 import { useAppContext } from "../../contexts/AppContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Register = () => {
   const { setIsLoggedIn, setCurrentUser } = useAppContext();
   const navigate = useNavigate();
+
+  const [loginError, setLoginError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +31,9 @@ const Register = () => {
       setCurrentUser(user);
       localStorage.setItem("access_token", "Bearer " + token);
       navigate("/");
-    } else console.log({ status, message, errors });
+    } else {
+      setLoginError(message);
+    }
   };
 
   return (
@@ -47,6 +52,7 @@ const Register = () => {
               <div className="column right has-text-centered">
                 <h1 className="title is-4">Log In</h1>
                 <p className="description">Welcome back!</p>
+                <p className="has-text-danger">{loginError}</p>
                 <form onSubmit={handleSubmit}>
                   <div className="field">
                     <div className="control">

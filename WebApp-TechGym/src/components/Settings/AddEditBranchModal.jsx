@@ -29,6 +29,8 @@ const AddEditBranchModal = ({ showModal, branch = null, closeModal, user }) => {
         progress: undefined,
         theme: "colored",
       });
+
+      e.target.name.value = "";
     } else {
       console.error(result.message);
       Swal.fire({
@@ -64,7 +66,7 @@ const AddEditBranchModal = ({ showModal, branch = null, closeModal, user }) => {
                     name="name"
                     type="text"
                     placeholder="Name"
-                    defaultValue={branch ? branch.name : ""}
+                    defaultValue={branch?.name}
                   />
                 </div>
               </div>
