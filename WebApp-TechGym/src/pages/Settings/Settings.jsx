@@ -65,7 +65,7 @@ const Settings = () => {
                 className="button is-primary"
                 onClick={() => setShowBranchModal(true)}
               >
-                New Branch
+                <i className="material-icons">add</i> New Branch
               </button>
             </div>
 
@@ -98,7 +98,7 @@ const Settings = () => {
             <div className="is-flex is-justify-content-space-between">
               <h1 className="title">Memberships</h1>
               <button className="button is-primary" onClick={() => setShowMembershipModal(true)}>
-                New Membership
+              <i className="material-icons">add</i> New Membership
               </button>
             </div>
 

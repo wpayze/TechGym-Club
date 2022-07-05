@@ -42,6 +42,12 @@ const NavBar = () => {
         <div className="navbar-start">
           {isLoggedIn && (
             <>
+              <NavLink to="users" className="navbar-item">
+                Users
+              </NavLink>
+              <NavLink to="trainers" className="navbar-item">
+                Trainers
+              </NavLink>
               <NavLink to="members" className="navbar-item">
                 Members
               </NavLink>
@@ -69,7 +75,9 @@ const NavBar = () => {
                     Gym Settings
                   </Link>
                   <a className="navbar-item">Users</a>
-                  <a className="navbar-item" onClick={() => logout()}>Log Out</a>
+                  <a className="navbar-item" onClick={() => logout()}>
+                    Log Out
+                  </a>
                 </div>
               </div>
             </>

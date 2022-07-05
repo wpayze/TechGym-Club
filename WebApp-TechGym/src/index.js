@@ -8,6 +8,7 @@ import { MembersProvider } from "./contexts/MembersContext";
 import { AppContextProvider } from "./contexts/AppContext";
 import { BranchProvider } from "./contexts/BranchContext";
 import { MembershipProvider } from "./contexts/MembershipContext";
+import { TrainersProvider } from "./contexts/TrainerContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,7 +16,9 @@ root.render(
     <MembersProvider>
       <BranchProvider>
         <MembershipProvider>
-          <App />
+          <TrainersProvider>
+            <App />
+          </TrainersProvider>
         </MembershipProvider>
       </BranchProvider>
     </MembersProvider>

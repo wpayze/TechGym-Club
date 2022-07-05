@@ -33,6 +33,7 @@ const Members = () => {
                 <th>Phone</th>
                 <th>Gender</th>
                 <th>Birthday</th>
+                <th>...</th>
               </tr>
             </thead>
             <tbody>
@@ -46,6 +47,14 @@ const Members = () => {
                   <td>{m.phone}</td>
                   <td>{m.gender}</td>
                   <td>{m.birthday}</td>
+                  <td>
+                    <Link
+                      to={`edit/${m.id}`}
+                      className="tag is-warning is-clickable"
+                    >
+                      Edit
+                    </Link>
+                  </td>
                 </tr>
               ))}
 

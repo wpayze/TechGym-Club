@@ -5,27 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Member extends Model
+class Trainer extends Model
 {
     use HasFactory;
-    protected  $fillable = [
-        "names",
-        "surnames",
+
+    protected $fillable = [
+        "name",
         "email",
-        "profession",
-        "address",
         "phone",
-        "emergency_phone",
-        "birthday",
-        "gender",
+        "rate",
+        "active",
         "branch_id"
     ];
 
     public function branch () {
         return $this->belongsTo(Branch::class);
-    }
-
-    public function image () {
-        return $this->morphOne(Image::class, 'imageable');
     }
 }

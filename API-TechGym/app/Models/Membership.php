@@ -16,6 +16,10 @@ class Membership extends Model
         "company_id"
     ];
 
+    public function company() {
+        return $this->belongsTo(Company::class);
+    }
+
     public function image () {
         return $this->morphOne(Image::class, 'imageable');
     }

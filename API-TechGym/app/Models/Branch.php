@@ -13,4 +13,13 @@ class Branch extends Model
         "name",
         "company_id"
     ];
+
+    public function members()
+    {
+        return $this->hasMany(Member::class);
+    }
+
+    public function trainers () {
+        return $this->hasMany(Trainer::class);
+    }
 }

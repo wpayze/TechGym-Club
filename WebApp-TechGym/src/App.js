@@ -5,6 +5,10 @@ import PageNotFound from "./components/PageNotFound";
 
 import Members from "./components/Members/Members";
 import AddEditMember from "./components/Members/AddEditMember";
+
+import Trainers from "./pages/Trainers/Trainers";
+import AddEditTrainer from "./pages/Trainers/AddEditTrainer";
+
 import Home from "./components/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
@@ -24,6 +28,11 @@ function App() {
           
           <Route path="members" element={ <Protected> <Members /> </Protected> } />
           <Route path="members/create" element={ <Protected> <AddEditMember /> </Protected> } />
+          <Route path="members/edit/:id" element={ <Protected> <AddEditMember /> </Protected> } />
+
+          <Route path="trainers" element={ <Protected> <Trainers /> </Protected> } />
+          <Route path="trainers/create" element={ <Protected> <AddEditTrainer /> </Protected> } />
+          <Route path="trainers/edit/:id" element={ <Protected> <AddEditTrainer /> </Protected> } />
 
           <Route path="settings" element={<Protected> <Settings /> </Protected>} />
   

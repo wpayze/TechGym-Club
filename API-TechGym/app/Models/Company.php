@@ -18,4 +18,13 @@ class Company extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function branches()
+    {
+        return $this->hasMany(Branch::class);
+    }
+
+    public function memberships () {
+        return $this->hasMany(Membership::class);
+    }
 }

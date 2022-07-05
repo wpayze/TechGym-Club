@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\api\BranchController;
 use App\Http\Controllers\Api\MemberController;
 use App\Http\Controllers\Api\MembershipController;
+use App\Http\Controllers\api\TrainerController;
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -35,6 +36,14 @@ Route::middleware('auth:sanctum')->controller(BranchController::class)->group(fu
     Route::post("/branch", "store");
     Route::put("/branch/{id}", "update");
     Route::delete("/branch/{id}", "delete");
+});
+
+Route::middleware('auth:sanctum')->controller(TrainerController::class)->group(function() {
+    Route::get("/trainer", "index");
+    Route::get("/trainer/{id}", "show");
+    Route::post("/trainer", "store");
+    Route::put("/trainer/{id}", "update");
+    Route::delete("/trainer/{id}", "delete");
 });
 
 Route::get('/refreshToken', function () {
