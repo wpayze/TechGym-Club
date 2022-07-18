@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivePlanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\api\BranchController;
@@ -44,6 +45,10 @@ Route::middleware('auth:sanctum')->controller(TrainerController::class)->group(f
     Route::post("/trainer", "store");
     Route::put("/trainer/{id}", "update");
     Route::delete("/trainer/{id}", "delete");
+});
+
+Route::middleware('auth:sanctum')->controller(ActivePlanController::class)->group(function() {
+    Route::get("/activeplans", "index");
 });
 
 Route::get('/refreshToken', function () {

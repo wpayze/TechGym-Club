@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivePlan;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -48,6 +49,7 @@ class MemberController extends Controller
             }
 
             $newMember = Member::create($request->all());
+            $newActivePlan = ActivePlan::create($request->all());
 
             return response()->json([
                 'status' => true,

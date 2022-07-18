@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import PageNotFound from "./components/PageNotFound";
 
-import Members from "./components/Members/Members";
-import AddEditMember from "./components/Members/AddEditMember";
+import Members from "./pages/Members/Members";
+import AddEditMember from "./pages/Members/AddEditMember";
 
 import Trainers from "./pages/Trainers/Trainers";
 import AddEditTrainer from "./pages/Trainers/AddEditTrainer";

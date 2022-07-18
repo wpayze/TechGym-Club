@@ -28,4 +28,9 @@ class Member extends Model
     public function image () {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    public function activePlans()
+    {
+        return $this->hasMany(ActivePlan::class);
+    }
 }

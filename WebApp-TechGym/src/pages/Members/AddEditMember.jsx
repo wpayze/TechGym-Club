@@ -9,12 +9,15 @@ import { useAppContext } from "../../contexts/AppContext";
 import { useMember } from "../../contexts/MembersContext";
 import { useBranch } from "../../contexts/BranchContext";
 import { useMembership } from "../../contexts/MembershipContext";
+import { useTrainer } from "../../contexts/TrainerContext";
 
 const AddEditMember = () => {
   const { currentUser } = useAppContext();
   const { branches, getBranches } = useBranch();
   const { memberships, getMemberships } = useMembership();
   const { addMember, editMember, members } = useMember();
+  const { trainers, getTrainers } = useTrainer();
+
   const navigate = useNavigate();
   const params = useParams();
 
@@ -26,6 +29,7 @@ const AddEditMember = () => {
   useEffect(() => {
     getBranches();
     getMemberships();
+    getTrainers();
   }, []);
 
   const handleSubmit = (e) => {
@@ -41,6 +45,8 @@ const AddEditMember = () => {
       gender: e.target.gender.value,
       address: e.target.address.value,
       branch_id: e.target.branch.value,
+      membership_id: e.target.membership.value,
+      trainer_id: e.target.trainer.value,
     };
 
     const memberFunc = existingMember ? editMember : addMember;
@@ -179,7 +185,7 @@ const AddEditMember = () => {
               <div className="control">
                 <input
                   className="input"
-                  type="text"
+                  type="text" 
                   name="phone"
                   defaultValue={existingMember ? existingMember.phone : ""}
                 />
@@ -218,7 +224,7 @@ const AddEditMember = () => {
               </div>
             </div>
           </div>
-          <div className="column is-6">
+          <div className="column is-3">
             <div className="field">
               <label className="label">Membership</label>
               <div className="control">
@@ -229,6 +235,23 @@ const AddEditMember = () => {
                         {b.name} ({b.months} Months,{" "}
                         {currentUser.company.currency}
                         {b.price})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="column is-3">
+            <div className="field">
+              <label className="label">Trainer</label>
+              <div className="control">
+                <div className="select is-fullwidth">
+                  <select name="trainer">
+                    <option value="0">None</option>
+                    {trainers.map((t) => (
+                      <option key={t.id} value={t.id}>
+                        {t.name} ({currentUser.company.currency}{t.rate}/Month)
                       </option>
                     ))}
                   </select>

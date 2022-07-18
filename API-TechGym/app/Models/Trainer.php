@@ -18,7 +18,13 @@ class Trainer extends Model
         "branch_id"
     ];
 
-    public function branch () {
+    public function branch()
+    {
         return $this->belongsTo(Branch::class);
+    }
+
+    public function activePlans()
+    {
+        return $this->hasMany(ActivePlan::class);
     }
 }
