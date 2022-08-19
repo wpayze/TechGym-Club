@@ -35,6 +35,11 @@ const AddEditMember = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const membership = memberships.find( m => m.id == e.target.membership.value);
+
+    const today = new Date();
+    const endDate = new Date(today.setMonth(today.getMonth()+membership.months))
+
     const formValues = {
       names: e.target.names.value,
       surnames: e.target.surnames.value,
@@ -45,7 +50,8 @@ const AddEditMember = () => {
       gender: e.target.gender.value,
       address: e.target.address.value,
       branch_id: e.target.branch.value,
-      membership_id: e.target.membership.value,
+      membership_id: membership.id,
+      end: endDate,
       trainer_id: e.target.trainer.value,
     };
 
@@ -131,7 +137,13 @@ const AddEditMember = () => {
                   className="input"
                   type="date"
                   name="birthday"
-                  defaultValue={existingMember ? new Date(existingMember.birthday).toISOString().substring(0,10) : ""}
+                  defaultValue={
+                    existingMember
+                      ? new Date(existingMember.birthday)
+                          .toISOString()
+                          .substring(0, 10)
+                      : ""
+                  }
                 />
               </div>
             </div>
@@ -145,8 +157,8 @@ const AddEditMember = () => {
                     name="gender"
                     defaultValue={existingMember ? existingMember.gender : ""}
                   >
-                    <option value='M'>M</option>
-                    <option value='F'>F</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
                   </select>
                 </div>
               </div>
@@ -185,7 +197,7 @@ const AddEditMember = () => {
               <div className="control">
                 <input
                   className="input"
-                  type="text" 
+                  type="text"
                   name="phone"
                   defaultValue={existingMember ? existingMember.phone : ""}
                 />
@@ -202,6 +214,24 @@ const AddEditMember = () => {
                   name="address"
                   defaultValue={existingMember ? existingMember.address : ""}
                 />
+              </div>
+            </div>
+          </div>
+          <div className="column is-3">
+            <div className="field">
+              <label className="label">Membership</label>
+              <div className="control">
+                <div className="select is-fullwidth">
+                  <select name="membership">
+                    {memberships.map((b) => (
+                      <option key={b.id} value={b.id}>
+                        {b.name} ({b.months} Months,{" "}
+                        {currentUser.company.currency}
+                        {b.price})
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -226,24 +256,6 @@ const AddEditMember = () => {
           </div>
           <div className="column is-3">
             <div className="field">
-              <label className="label">Membership</label>
-              <div className="control">
-                <div className="select is-fullwidth">
-                  <select name="membership">
-                    {memberships.map((b) => (
-                      <option key={b.id} value={b.id}>
-                        {b.name} ({b.months} Months,{" "}
-                        {currentUser.company.currency}
-                        {b.price})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="column is-3">
-            <div className="field">
               <label className="label">Trainer</label>
               <div className="control">
                 <div className="select is-fullwidth">
@@ -251,7 +263,8 @@ const AddEditMember = () => {
                     <option value="0">None</option>
                     {trainers.map((t) => (
                       <option key={t.id} value={t.id}>
-                        {t.name} ({currentUser.company.currency}{t.rate}/Month)
+                        {t.name} ({currentUser.company.currency}
+                        {t.rate}/Month)
                       </option>
                     ))}
                   </select>
@@ -268,8 +281,6 @@ const AddEditMember = () => {
             </Link>
           </div>
         </div>
-
-        <div className="is-flex is-justify-content-end"></div>
       </form>
     </div>
   );

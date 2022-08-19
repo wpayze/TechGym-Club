@@ -30,8 +30,10 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         try {
+            $memberInfo = $request->all();
+
             $validatedMember = Validator::make(
-                $request->all(),
+                $memberInfo,
                 [
                     'names' => 'required',
                     'surnames' => 'required',
@@ -48,12 +50,16 @@ class MemberController extends Controller
                 ], 401);
             }
 
-            $newMember = Member::create($request->all());
-            $newActivePlan = ActivePlan::create($request->all());
+            $newMember = Member::create($memberInfo);
+            $memberInfo["member_id"] = $newMember->id;
+            $memberInfo["end"] = date('Y-m-d H:i:s', strtotime($memberInfo["end"]));
+
+            $newActivePlan = ActivePlan::create($memberInfo);
 
             return response()->json([
                 'status' => true,
-                'member' => $newMember
+                'member' => $newMember,
+                'plan' => $newActivePlan
             ], 200);
         } catch (\Throwable $th) {
             return response()->json([
